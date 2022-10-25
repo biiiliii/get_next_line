@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.h                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bimartin <bimartin@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/18 12:29:25 by bimartin          #+#    #+#             */
-/*   Updated: 2022/10/24 17:00:28 by bimartin         ###   ########.fr       */
+/*   Created: 2022/10/25 11:53:26 by bimartin          #+#    #+#             */
+/*   Updated: 2022/10/25 11:57:15 by bimartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#ifndef GET_NEXT_LINE_BONUS_H
+# define GET_NEXT_LINE_BONUS_H
 
 /*=-=-=-=-=-=-=-=-=-=-=-=-=-=-[include <>]-=-=-=-=-=-=-=-=-=-=-=-=-=-=*/
 # include <unistd.h>

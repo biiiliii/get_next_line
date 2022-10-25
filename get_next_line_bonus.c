@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bimartin <bimartin@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/18 12:15:43 by bimartin          #+#    #+#             */
-/*   Updated: 2022/10/25 11:45:23 by bimartin         ###   ########.fr       */
+/*   Created: 2022/10/25 11:53:10 by bimartin          #+#    #+#             */
+/*   Updated: 2022/10/25 12:19:49 by bimartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 char	*ptr_free(char **ptr)
 {
@@ -104,62 +104,27 @@ char	*read_file(int fd, char *buf)
 
 char	*get_next_line(int fd)
 {
-	static char	*buffer = NULL;
+	static char	*buffer[1024];
 	char		*line;
 
 	if (BUFFER_SIZE <= 0 || fd < 0)
 		return (NULL);
-	if (!buffer || (buffer && !ft_strchr(buffer, '\n')))
-		buffer = read_file(fd, buffer);
-	if (!buffer)
-	{
+	if (!buffer[fd] || (buffer[fd] && !ft_strchr(buffer[fd], '\n')))
+		buffer[fd] = read_file(fd, buffer[fd]);
+	if (!buffer[fd])
 		return (NULL);
-	}
-	line = next_line(buffer);
+	line = next_line(buffer[fd]);
 	if (!line)
 	{
-		ptr_free(&buffer);
-		buffer = NULL;
+		ptr_free(&buffer[fd]);
+		buffer[fd] = NULL;
 		return (NULL);
 	}
-	buffer = del_line(buffer);
-	if (!buffer)
+	buffer[fd] = del_line(buffer[fd]);
+	if (!buffer[fd])
 	{
-		ptr_free(&buffer);
-		buffer = NULL;
+		ptr_free(&buffer[fd]);
+		buffer[fd] = NULL;
 	}
 	return (line);
 }
-
-// int	main(void)
-// {
-// 	int		fd;
-// 	char	*temp;
-
-// 	fd = open("./test", O_RDONLY);
-// 	temp = get_next_line(fd);
-// 	printf("LINIA 1: %s", temp);
-// 	free(temp);
-// 	temp = get_next_line(fd);
-// 	printf("LINIA 2: %s", temp);
-// 	free(temp);
-// 	close(fd);
-// 	printf("%i\n", fd);
-// 	do
-// 	{
-// 		temp = get_next_line(fd);
-// 		free(temp);
-// 	} while (temp != NULL);
-// 	close(fd);
-// 	fd = open("./test", O_RDONLY);
-// 	temp = get_next_line(fd);
-// 	printf("LINIA 3: %s", temp);
-// 	free(temp);
-// 	temp = get_next_line(fd);
-// 	printf("LINIA 4: %s", temp);
-// 	free(temp);
-// 	temp = get_next_line(fd);
-// 	printf("LINIA 5: %s", temp);
-// 	free(temp);
-// 	return (0);
-// }
