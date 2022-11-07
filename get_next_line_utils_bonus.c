@@ -6,7 +6,7 @@
 /*   By: bimartin <bimartin@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 11:53:45 by bimartin          #+#    #+#             */
-/*   Updated: 2022/10/25 12:10:07 by bimartin         ###   ########.fr       */
+/*   Updated: 2022/11/07 16:31:48 by bimartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ char	*ft_strjoin(char *s1, char *s2)
 	}
 	ptr = (char *)malloc((ft_strlen(s1) + ft_strlen(s2) + 1) * sizeof(char));
 	if (!ptr)
-		return (NULL);
+		return (ptr_free(&s1));
 	i = -1;
 	j = 0;
 	while (s1[++i])
@@ -86,6 +86,8 @@ size_t	ft_strlen(const char *str)
 {
 	int	i;
 
+	if (!str)
+		return (0);
 	i = 0;
 	while (str[i] != '\0')
 		i++;

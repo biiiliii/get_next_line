@@ -6,7 +6,7 @@
 /*   By: bimartin <bimartin@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 11:53:10 by bimartin          #+#    #+#             */
-/*   Updated: 2022/10/25 12:19:49 by bimartin         ###   ########.fr       */
+/*   Updated: 2022/11/07 16:53:10 by bimartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ char	*next_line(char *buffer)
 		return (NULL);
 	while (buffer[i] && buffer[i] != '\n')
 		i++;
-	line = ft_calloc(i + 2, sizeof(char));
+	line = ft_calloc(i + 1, sizeof(char));
 	if (!line)
 		return (NULL);
 	i = 0;
@@ -68,7 +68,7 @@ char	*next_line(char *buffer)
 	}
 	if (buffer[i] != '\0' || buffer[i] == '\n')
 	{
-		line[i++] = '\n';
+		line = ft_strjoin(line, "\n");
 	}
 	return (line);
 }
@@ -104,10 +104,10 @@ char	*read_file(int fd, char *buf)
 
 char	*get_next_line(int fd)
 {
-	static char	*buffer[1024];
+	static char	*buffer[OPEN_MAX] = {0};
 	char		*line;
 
-	if (BUFFER_SIZE <= 0 || fd < 0)
+	if (BUFFER_SIZE <= 0 || fd < 0 || fd > OPEN_MAX)
 		return (NULL);
 	if (!buffer[fd] || (buffer[fd] && !ft_strchr(buffer[fd], '\n')))
 		buffer[fd] = read_file(fd, buffer[fd]);
